@@ -18,11 +18,8 @@ class BaseContact:
 
     @property
     def label_length(self):
+        self._label_length = len(f'{self.name} {self.surname}')
         return self._label_length
-
-    @label_length.setter
-    def label_lenght(self, value):
-        self._label_length = value
 
 class BussinesContact(BaseContact):
     def __init__(self, office, company, company_phone, *args, **kwargs):
@@ -33,6 +30,8 @@ class BussinesContact(BaseContact):
 
     def contact(self):
         return f'Wybieram numer {self.company_phone} i dzwonię do {self.name} {self.surname} z firmy {self.company}'
+
+
 
 def generator(rodzaj):
     dane = Faker('pl_PL')
@@ -59,8 +58,9 @@ bas = create_contacts(True, 2)
 biz = create_contacts(False, 2)
 
 
-print(biz[1].contact())
+print(biz[0].contact())
 print(bas[1].contact())
 
-BaseContact.label_length = len(f'{biz[1].name} {biz[1].surname}')
-print(f'Długość imienia i nazwiska: {BaseContact.label_length}')
+print(f'Długość imienia i nazwiska {bas[1].name} {bas[1].surname}: {bas[1].label_length}')
+print(f'Długość imienia i nazwiska {biz[1].name} {biz[1].surname}: {biz[1].label_length}')
+
